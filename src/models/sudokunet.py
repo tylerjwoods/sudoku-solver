@@ -41,4 +41,4 @@ class SudokuNet():
         model.add(Activation("softmax"))
 
         # return the constructed network architecture 
-        return model 
+        return model  
