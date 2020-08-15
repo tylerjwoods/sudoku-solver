@@ -42,4 +42,34 @@ def find_puzzle(image, debug=False):
         if len(approx) == 4:
             puzzleCnt = approx 
             break 
-        
+
+    # if the puzzle contour is empty then our script could not find
+    # the outline of the sudoku puzzle so raise an error
+    if puzzleCnt is None:
+        raise Exception(("Could not find sudoku puzzle outline. "
+            "Try debugging your thresholding and contour steps."))
+    
+    # check to see if we are visualizing the outline of the detected
+    # sudoku puzzle
+    if debug:
+        # draw the contour of the puzzle on the image and then display
+        # it to our screen for visualization / debggung purposes
+        output = image.copy()
+        cv2.drawContours(output, [puzzleCnt], -1, (0, 255, 0), 2)
+        cv2.imshow("Puzzle Outline", output)
+        cv2.waitKey(0)
+
+    # apply a four point persceptive transform to both the original
+    # image and grayscale image to obtain a top-down bird's eye view
+    # of the puzzle
+    puzzle = four_point_transform(image, puzzleCnt.reshape(4, 2))
+    warped = four_point_transform(gray, puzzleCnt.reshape(4, 2))
+
+    # check to see if we are visualizing the perspective transform
+    if debug:
+        # show the output warped image (again, for debugging purposes)
+        cv2.imshow("Puzzle Transform", puzzle)
+        cv2.waitKey(0)
+
+    # return a 2-tuple of puzzle in both RGB and grayscale
+    return (puzzle, warped)
