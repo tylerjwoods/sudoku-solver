@@ -111,7 +111,7 @@ for (cellRow, boardRow) in zip(cellLocs, solution.board):
 
 		# draw the result digit on the sudoku puzzle image
 		cv2.putText(puzzleImage, str(digit), (textX, textY),
-			cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 255, 255), 2)
+			cv2.FONT_HERSHEY_SIMPLEX, 0.9, (0, 0, 255), 2)
 
 # show the output image
 cv2.imshow("Sudoku Result", puzzleImage)
