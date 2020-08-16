@@ -1,3 +1,6 @@
+# USAGE
+# python train_digit_classifier.py --model output/digit_classifier.h5
+
 # import the necessary packages
 from src.models.sudokunet import SudokuNet
 from tensorflow.keras.optimizers import Adam 
@@ -15,7 +18,7 @@ args = vars(ap.parse_args())
 # initialize the initial learning rate, number of epochs to train
 # for, and batch size
 INIT_LR = 1e-3
-EPOCHS = 10
+EPOCHS = 10 
 BS = 128
 
 # grab the MNIST dataset
